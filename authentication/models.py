@@ -7,3 +7,6 @@ from visits.models import PatientCard
 class CustomUser(AbstractUser):
     is_doctor = models.BooleanField(default=False)
     medical_right_number = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.get_full_name()
