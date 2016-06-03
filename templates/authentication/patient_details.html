@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Patient details <small>{{ patient }}</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="{% url 'users:card_details' patient.my_card.id %}">Patient card details</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Personal information</h2>
+        <dl class="dl-horizontal">
+            <dt>Patient</dt>
+            <dd>{{ patient }}</dd>
+            <dt>PESEL</dt>
+            <dd>{{ patient.pesel|default:"none" }}</dd>
+            <dt>Date of birth</dt>
+            <dd>{{ patient.date_of_birth }}</dd>
+        </dl>
+
+        <h2>Contact details</h2>
+        <dl class="dl-horizontal">
+            <dt>Email</dt>
+            <dd>{{ patient.email|default:"none" }}</dd>
+            <dt>Telephone</dt>
+            <dd>{{ patient.telephone|default:"none" }}</dd>
+            <dt>Address</dt>
+            <dd>{{ patient.get_full_address|default:"none" }}</dd>
+        </dl>
+    </div>
+
+{% endblock %}

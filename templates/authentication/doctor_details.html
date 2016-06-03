@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Doctor details <small>{{ doctor }}</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Personal information</h2>
+        <dl class="dl-horizontal">
+            <dt>Doctor</dt>
+            <dd>{{ doctor }}</dd>
+            <dt>PESEL</dt>
+            <dd>{{ doctor.pesel|default:"none" }}</dd>
+            <dt>Medicat right number</dt>
+            <dd>{{ doctor.medical_right_number|default:"none" }}</dd>
+            <dt>Date of birth</dt>
+            <dd>{{ doctor.date_of_birth }}</dd>
+        </dl>
+
+        <h2>Contact details</h2>
+        <dl class="dl-horizontal">
+            <dt>Email</dt>
+            <dd>{{ doctor.email|default:"none" }}</dd>
+            <dt>Telephone</dt>
+            <dd>{{ doctor.telephone|default:"none" }}</dd>
+            <dt>Address</dt>
+            <dd>{{ doctor.get_full_address|default:"none" }}</dd>
+        </dl>
+
+        <div class="container">
+            <h2>All patients</h2>
+            {% if doctor.cards.all %}
+            <ul>
+                {% for card in doctor.cards.all %}
+                    <li><a href="{% url 'users:patients_details' card.patient.id %}">{{ card.patient }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>This doctor doesn't has any patients.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
