@@ -13,8 +13,11 @@ class Visit(models.Model):
     timestamp = models.DateTimeField()
     reason = models.TextField(blank=True)
     description = models.TextField(blank=True)
-    card = models.ForeignKey(PatientCard)
+    card = models.ForeignKey(PatientCard, related_name='visits')
     doctor = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
         ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "{}".format(self.timestamp.date())

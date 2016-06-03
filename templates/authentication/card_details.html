@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Card details <small> for {{ card.patient }}</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Card details</h2>
+        <dl class="dl-horizontal">
+            <dt>Patient</dt>
+            <dd>{{ card.patient }}</dd>
+            <dt>PESEL</dt>
+            <dd>{{ card.patient.pesel|default:"none" }}</dd>
+            <dt>Registration date</dt>
+            <dd>{{ card.registration_date }}</dd>
+            <dt>Insurance</dt>
+            <dd>{{ card.insurance|default:"none" }}</dd>
+            <dt>Main doctor</dt>
+            <dd>{{ card.main_doctor }}</dd>
+        </dl>
+    </div>
+
+    <div class="container">
+        <h2>All visits</h2>
+        {% if card.visits.all %}
+        <ul>
+            {% for visit in card.visits.all %}
+                <li><a href="{% url 'visits:details' visit.id %}">{{ visit }} - {{ visit.doctor }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>There are no visits.</p>
+        {% endif %}
+
+    </div>
+
+    <div class="container">
+        <h2>Documents</h2>
+        {% include "documents/list.html" with documents=card.patient.patient_referral.all document_name="referrals" related_name="card" %}
+        {% include "documents/list.html" with documents=card.patient.patient_prescription.all document_name="prescriptions" related_name="card" %}
+        {% include "documents/list.html" with documents=card.patient.patient_receipt.all document_name="receipts" related_name="card" %}
+    </div>
+
+{% endblock %}
