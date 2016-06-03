@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView
 
 from visits.models import Visit
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 
 class VisitIndexView(ListView):
@@ -27,3 +27,4 @@ class VisitIndexView(ListView):
 class VisitDetailView(DetailView):
     template_name = 'visits/details.html'
     model = Visit
+    context_object_name = 'visit'

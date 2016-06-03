@@ -13,6 +13,9 @@ class Document(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return "{}, {}".format(self.number, self.created_date.date())
+
 
 class Referral(Document):
     pass

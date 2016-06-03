@@ -1,3 +1,46 @@
 {% extends "base.html" %}
 
-{% block content %}Details visits{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Visit details <small>{{ visit.timestamp }}</small></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#">Patient card details</a></li>
+            <li role="presentation"><a href="#">Patient personal details</a></li>
+            <li role="presentation"><a href="#">Main doctor</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Planed visit details</h2>
+        <dl class="dl-horizontal">
+            <dt>Patient</dt>
+            <dd>{{ visit.card.patient }}</dd>
+            <dt>PESEL</dt>
+            <dd>{{ visit.card.patient.pesel|default:"none" }}</dd>
+            <dt>Doctor</dt>
+            <dd>{{ visit.doctor }}</dd>
+            <dt>Visit date</dt>
+            <dd>{{ visit.timestamp }}</dd>
+            <dt>Visit reason</dt>
+            <dd>{{ visit.reason|default:"none" }}</dd>
+        </dl>
+    </div>
+
+    <div class="container">
+        <h2>Completed visit details</h2>
+        <p class="lead">{{ visit.description|default:"Visit hasn't been completed yet." }}</p>
+    </div>
+
+    <div class="container">
+        <h2>Documents</h2>
+        {% include "documents/list.html" with documents=visit.referral.all document_name="referrals" related_name="visit" %}
+        {% include "documents/list.html" with documents=visit.prescription.all document_name="prescriptions" related_name="visit" %}
+        {% include "documents/list.html" with documents=visit.receipt.all document_name="receipts" related_name="visit" %}
+    </div>
+
+{% endblock %}

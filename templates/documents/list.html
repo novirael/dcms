@@ -1,0 +1,10 @@
+<h3>Attached {{ document_name }}</h3>
+{% if documents %}
+    <ul>
+        {% for document in documents %}
+        <li><a href="#">{{ document }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no {{ document_name }} related to this {{ related_name }}.</p>
+{% endif %}
