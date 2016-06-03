@@ -26,8 +26,8 @@
           <ul class="nav navbar-nav">
             <li {% if 'visits' in request.path %}class="active"{% endif %}><a href=/visits/>Visits</a></li>
             <li {% if 'schedule' in request.path %}class="active"{% endif %}><a href="/schedule/">Schedule</a></li>
-            <li {% if 'patients' in request.path %}class="active"{% endif %}><a href="/patients/">Patients</a></li>
-            <li {% if 'doctors' in request.path %}class="active"{% endif %}><a href="/doctors/">Doctors</a></li>
+            <li {% if 'patients' in request.path %}class="active"{% endif %}><a href="/users/patients/">Patients</a></li>
+            <li {% if 'doctors' in request.path %}class="active"{% endif %}><a href="/users/doctors/">Doctors</a></li>
           </ul>
           <p class="navbar-text navbar-right">
             <a href="{% if user.is_superuser %}/admin/{% endif %}" class="navbar-link">{{ user.get_full_name }}</a>

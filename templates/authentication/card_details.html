@@ -9,7 +9,7 @@
 
     <div class="container">
         <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="{% url 'users:patients_details' card.patient.id %}">Patient personal details</a></li>
+            <li role="presentation"><a href="{% url 'users:patient_details' card.patient.id %}">Patient personal details</a></li>
             <li role="presentation"><a href="{% url 'users:doctor_details' card.main_doctor.id %}">Main doctor</a></li>
         </ul>
     </div>

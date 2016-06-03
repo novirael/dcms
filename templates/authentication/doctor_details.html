@@ -35,7 +35,7 @@
             {% if doctor.cards.all %}
             <ul>
                 {% for card in doctor.cards.all %}
-                    <li><a href="{% url 'users:patients_details' card.patient.id %}">{{ card.patient }}</a></li>
+                    <li><a href="{% url 'users:patient_details' card.patient.id %}">{{ card.patient }}</a></li>
                 {% endfor %}
             </ul>
             {% else %}

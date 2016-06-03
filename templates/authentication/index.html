@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>All {% if is_doctor %}doctors{% else %}patients{% endif %}</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>PESEL</th>
+                <th>Telephone</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for person in people %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ person }}</td>
+                <td>{{ person.pesel }}</td>
+                <td>{{ person.telephone }}</td>
+                <td><a href="{% if is_doctor %}{% url 'users:doctor_details' person.id %}{% else %}{% url 'users:patient_details' person.id %}{% endif %}">Go to details</a></td>
+            </tr>
+            {% endfor %}
+           </tbody>
+        </table>
+    </div>
+
+    <nav>
+        <ul class="pager">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">Newer</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">Older</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <p class="text-center">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+
+{% endblock %}
