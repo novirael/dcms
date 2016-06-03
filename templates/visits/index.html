@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if not page_obj.has_previous %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Today's visits</h1>
+        </div>
+        {% if todays_visits %}
+            {% include "visits/table.html" with visits=todays_visits %}
+        {% else %}
+            <p>You don't have any visits scheduled for today.</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Future visits</h1>
+        </div>
+        {% if future_visits %}
+            {% include "visits/table.html" with visits=future_visits %}
+        {% else %}
+            <p>You don't have any future visits.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Past visits</h1>
+        </div>
+        {% if past_visits %}
+            {% include "visits/table.html" with visits=past_visits %}
+        {% else %}
+            <p>You don't have any past visits.</p>
+        {% endif %}
+    </div>
+
+    <nav>
+        <ul class="pager">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">Newer</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">Older</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <p class="text-center">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+
+{% endblock %}

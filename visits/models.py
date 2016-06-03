@@ -14,3 +14,6 @@ class Visit(models.Model):
     description = models.TextField()
     card = models.ForeignKey(PatientCard)
     doctor = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    class Meta:
+        ordering = ('-timestamp',)
