@@ -20,22 +20,28 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Dental Clinic Management System</a>
+          <a class="navbar-brand" href="/">Dental Clinic Management System</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="visits/">Visits</a></li>
-            <li><a href="schedule/">Schedule</a></li>
-            <li><a href="patients/">Patients</a></li>
+            <li {% if 'visits' in request.path %}class="active"{% endif %}><a href=/visits/>Visits</a></li>
+            <li {% if 'schedule' in request.path %}class="active"{% endif %}><a href="/schedule/">Schedule</a></li>
+            <li {% if 'patients' in request.path %}class="active"{% endif %}><a href="/patients/">Patients</a></li>
+            <li {% if 'doctors' in request.path %}class="active"{% endif %}><a href="/doctors/">Doctors</a></li>
           </ul>
+          <p class="navbar-text navbar-right">
+            <a href="{% if user.is_superuser %}/admin/{% endif %}" class="navbar-link">{{ user.get_full_name }}</a>
+            <span class="glyphicon glyphicon-user"></span>
+            <a href="#"><span class="glyphicon glyphicon-log-out"></span></a>
+          </p>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     {% block content %}
-      <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      <div class="starter-template" style="padding: 40px 15px; text-align: center;">
+        <h1>Welcome in Dental Clinic Management system</h1>
+        <p class="lead">Review your planed and completed <a href='/visits/'>visits</a> or go check current <a href="/schedule/">schedule</a>.</p>
       </div>
     {% endblock %}
 
