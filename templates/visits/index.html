@@ -3,39 +3,11 @@
 {% block content %}
 
     {% if not page_obj.has_previous %}
-    <div class="container">
-        <div class="page-header">
-            <h1>Today's visits</h1>
-        </div>
-        {% if todays_visits %}
-            {% include "visits/table.html" with visits=todays_visits %}
-        {% else %}
-            <p>You don't have any visits scheduled for today.</p>
-        {% endif %}
-    </div>
-
-    <div class="container">
-        <div class="page-header">
-            <h1>Future visits</h1>
-        </div>
-        {% if future_visits %}
-            {% include "visits/table.html" with visits=future_visits %}
-        {% else %}
-            <p>You don't have any future visits.</p>
-        {% endif %}
-    </div>
+        {% include "visits/table.html" with visits=todays_visits title="Today's visits" empty_msg="You don't have any visits scheduled for today." %}
+        {% include "visits/table.html" with visits=future_visits title="Future visits" empty_msg="You don't have any future visits." %}
     {% endif %}
 
-    <div class="container">
-        <div class="page-header">
-            <h1>Past visits</h1>
-        </div>
-        {% if past_visits %}
-            {% include "visits/table.html" with visits=past_visits %}
-        {% else %}
-            <p>You don't have any past visits.</p>
-        {% endif %}
-    </div>
+    {% include "visits/table.html" with visits=past_visits title="Past visits" empty_msg="You don't have any past visits." %}
 
     <nav>
         <ul class="pager">

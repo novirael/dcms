@@ -1,23 +1,33 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Patient</th>
-        <th>Doctor</th>
-        <th>Date</th>
-        <th>Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for visit in visits %}
-    <tr>
-        <th scope="row">{{forloop.counter}}</th>
-        <td>{{ visit.card.patient.get_full_name }}</td>
-        <td>{{ visit.doctor.get_full_name }}</td>
-        <td>{{ visit.timestamp|date:"d-m-Y" }}</td>
-        <td>{{ visit.timestamp|date:"H:m" }}</td>
-        <td><a href="{% url 'visits:details' visit.pk %}">Go to details</a></td>
-    </tr>
-    {% endfor %}
-   </tbody>
-</table>
+<div class="container">
+    <div class="page-header">
+        <h1>{{ title }}</h1>
+    </div>
+    {% if visits %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for visit in visits %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ visit.card.patient.get_full_name }}</td>
+                <td>{{ visit.doctor.get_full_name }}</td>
+                <td>{{ visit.timestamp|date:"d-m-Y" }}</td>
+                <td>{{ visit.timestamp|date:"H:m" }}</td>
+                <td><a href="{% url 'visits:details' visit.pk %}">Go to details</a></td>
+            </tr>
+            {% endfor %}
+           </tbody>
+        </table>
+    {% else %}
+        <p>{{ empty_msg }}</p>
+    {% endif %}
+</div>
