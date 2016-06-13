@@ -8,6 +8,9 @@ class PatientCard(models.Model):
     patient = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='my_card')
     main_doctor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cards')
 
+    def __str__(self):
+        return self.patient.get_full_name()
+
 
 class Visit(models.Model):
     timestamp = models.DateTimeField()
